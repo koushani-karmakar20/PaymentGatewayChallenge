@@ -135,6 +135,9 @@ public class PaymentGatewayService
         //once the payment is successfully completed , create a record of the payment in payments database
         //rn considering only successful payment
 
+        //string responseBody = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(response);
+
         string description="";
         bool status;
         if (response.IsSuccessStatusCode)
@@ -143,7 +146,7 @@ public class PaymentGatewayService
         }
         else{
             status=false;
-            description="Payment unsuccessful";
+            description="Payment unsuccessful: "+response.ReasonPhrase;
         }
 
         

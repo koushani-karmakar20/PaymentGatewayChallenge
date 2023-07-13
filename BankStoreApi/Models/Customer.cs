@@ -16,7 +16,7 @@ public class Customer
 
     public int CVV { get; set; }
 
-    public int Balance { get; set; }
+    public double Balance { get; set; }
 
    // public string Author { get; set; } = null!;
 }

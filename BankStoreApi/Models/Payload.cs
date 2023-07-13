@@ -16,7 +16,7 @@ public class Payload
 
     public int CVV { get; set; }
 
-    public int Amount { get; set; }
+    public double Amount { get; set; }
 
     public string Merchant_card_number{get; set;}=null!;
 

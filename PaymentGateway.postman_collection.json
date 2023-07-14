@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "e39a9ae9-1505-41b2-a031-5a9f7feff273",
+		"name": "PaymentGateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19194098",
+		"_collection_link": "https://www.postman.com/koushanipost/workspace/paymentgateway/collection/19194098-e39a9ae9-1505-41b2-a031-5a9f7feff273?action=share&creator=19194098&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "PaymentGateway/RetrievePayment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/plain"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Api-Key",
+						"value": "820d76c8f753caa9bdb241f2fb7c81af35298978222cb4f661e287a0a8d09541"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"payment_id\": \"64aec9c54235f9c1cf142821\",\n  \"merchant_id\": \"64ad531263ef5521562afa49\"\n}"
+				},
+				"url": {
+					"raw": "{{PaymentGatewayAPIProd}}/api/PaymentGateway/RetrievePayment?merchantIdentifier=64ad531263ef5521562afa49",
+					"host": [
+						"{{PaymentGatewayAPIProd}}"
+					],
+					"path": [
+						"api",
+						"PaymentGateway",
+						"RetrievePayment"
+					],
+					"query": [
+						{
+							"key": "merchantIdentifier",
+							"value": "64ad531263ef5521562afa49"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaymentGateway/SendPaymentRequestToBank",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customer_card_number\": \"1277-8899-7766-0989\",\n    \"expiry\": \"2025/07\",\n    \"amount\": 10,\n    \"currency\": \"EUR\",\n    \"cvv\": 666,\n    \"merchant_id\": \"64ad539663ef5521562afa4c\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PaymentGatewayAPIProd}}/api/PaymentGateway/SendPaymentRequestToBank?merchantIdentifier=64ad531263ef5521562afa49",
+					"host": [
+						"{{PaymentGatewayAPIProd}}"
+					],
+					"path": [
+						"api",
+						"PaymentGateway",
+						"SendPaymentRequestToBank"
+					],
+					"query": [
+						{
+							"key": "merchantIdentifier",
+							"value": "64ad531263ef5521562afa49"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaymentGateway/GetPayments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PaymentGatewayAPIProd}}/api/PaymentGateway/GetPayments",
+					"host": [
+						"{{PaymentGatewayAPIProd}}"
+					],
+					"path": [
+						"api",
+						"PaymentGateway",
+						"GetPayments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaymentGateway/GetMerchants",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PaymentGatewayAPIProd}}/api/PaymentGateway/GetMerchants",
+					"host": [
+						"{{PaymentGatewayAPIProd}}"
+					],
+					"path": [
+						"api",
+						"PaymentGateway",
+						"GetMerchants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaymentGateway/GetMerchantWithId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/plain"
+					}
+				],
+				"url": {
+					"raw": "{{PaymentGatewayAPIProd}}/api/PaymentGateway/GetMerchantWithId?id=64ad531263ef5521562afa49",
+					"host": [
+						"{{PaymentGatewayAPIProd}}"
+					],
+					"path": [
+						"api",
+						"PaymentGateway",
+						"GetMerchantWithId"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "64ad531263ef5521562afa49"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaymentGateway/GetPaymentWithId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PaymentGatewayAPIProd}}/api/PaymentGateway/GetPaymentWithId?id=64aec9c54235f9c1cf142821",
+					"host": [
+						"{{PaymentGatewayAPIProd}}"
+					],
+					"path": [
+						"api",
+						"PaymentGateway",
+						"GetPaymentWithId"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "64aec9c54235f9c1cf142821"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaymentGateway/CreatePayment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": true,\n    \"timestamp\": \"2023-07-14T13:03:44.954Z\",\n    \"customer_card_number\": \"string\",\n    \"expiry\": \"string\",\n    \"amount\": 0,\n    \"currency\": \"string\",\n    \"cvv\": 0,\n    \"merchant_id\": \"string\",\n    \"description\": \"string\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PaymentGatewayAPIProd}}/api/PaymentGateway/CreatePayment",
+					"host": [
+						"{{PaymentGatewayAPIProd}}"
+					],
+					"path": [
+						"api",
+						"PaymentGateway",
+						"CreatePayment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaymentGateway/CreateMerchant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"merchant_id\": \"string\",\n    \"is_active\": true,\n    \"apI_key\": \"string\",\n    \"card_number\": \"string\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PaymentGatewayAPIProd}}/api/PaymentGateway/CreateMerchant",
+					"host": [
+						"{{PaymentGatewayAPIProd}}"
+					],
+					"path": [
+						"api",
+						"PaymentGateway",
+						"CreateMerchant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bank/CreateCustomer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"card_number\": \"1234-5678-9234-7898\",\n  \"expiry\": \"2028/02\",\n  \"cvv\": 100,\n  \"balance\": 10000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BankAPIProd}}/Bank/CreateCustomer",
+					"host": [
+						"{{BankAPIProd}}"
+					],
+					"path": [
+						"Bank",
+						"CreateCustomer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bank/GetCustomer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BankAPILocal}}/Bank/GetCustomer?id=1234-5678-9234-7898",
+					"host": [
+						"{{BankAPILocal}}"
+					],
+					"path": [
+						"Bank",
+						"GetCustomer"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1234-5678-9234-7898"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bank/PerformTransaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customer_card_number\": \"1234-5678-9234-7898\",\n    \"expiry\": \"2028/02\",\n    \"cvv\": 100,\n    \"amount\": 100,\n    \"merchant_card_number\": \"1234-5678-9234-9879\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BankAPILocal}}/Bank/PerformTransaction",
+					"host": [
+						"{{BankAPILocal}}"
+					],
+					"path": [
+						"Bank",
+						"PerformTransaction"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BankAPILocal",
+			"value": "http://localhost:5121",
+			"type": "string"
+		},
+		{
+			"key": "PaymentGatewayAPILocal",
+			"value": "http://localhost:5281",
+			"type": "string"
+		},
+		{
+			"key": "BankAPIProd",
+			"value": "https://mockbank.azurewebsites.net",
+			"type": "string"
+		},
+		{
+			"key": "PaymentGatewayAPIProd",
+			"value": "https://paymentgateway-koushani.azurewebsites.net",
+			"type": "string"
+		}
+	]
+}

@@ -184,8 +184,8 @@ public class PaymentGatewayService
             Id = payment.Id,
             Status=payment.Status,
             Timestamp=payment.Timestamp,
-            Customer_card_number=payment.Customer_card_number,
-            Expiry=payment.Expiry,
+            Customer_card_number=payment.Customer_card_number[0]+payment.Customer_card_number[1]+"XX-XXXX-XXXX-XX"+payment.Customer_card_number[17]+payment.Customer_card_number[18],
+            Expiry=payment.Expiry[0]+payment.Expiry[1]+payment.Expiry[2]+payment.Expiry[3]+"/XX",
             Amount=payment.Amount,
             Currency=payment.Currency,
             Merchant_id=payment.Merchant_id,
@@ -193,4 +193,5 @@ public class PaymentGatewayService
         };
         return retrieveResponse;
     }
+
 }

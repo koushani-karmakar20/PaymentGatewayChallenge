@@ -1,23 +1,24 @@
 .vscode
 .DS_Store
 WiredTiger
-	   PaymentApi/WiredTiger
-	  PaymentApi/WiredTiger.lock
-	   PaymentApi/WiredTiger.turtle
-	 PaymentApi/WiredTiger.wt
-	  PaymentApi/WiredTigerHS.wt
-	  PaymentApi/_mdb_catalog.wt
-	   PaymentApi/collection-0-1765933690296327598.wt
-	  PaymentApi/collection-2-1765933690296327598.wt
-	   PaymentApi/collection-4-1765933690296327598.wt
-	  PaymentApi/diagnostic.data/metrics.2023-07-11T12-08-20Z-00000
-	  PaymentApi/index-1-1765933690296327598.wt
-	   PaymentApi/index-3-1765933690296327598.wt
-	  PaymentApi/index-5-1765933690296327598.wt
-  PaymentApi/index-6-1765933690296327598.wt
-	  PaymentApi/journal/WiredTigerLog.0000000001
-	   PaymentApi/journal/WiredTigerPreplog.0000000001
-	   PaymentApi/journal/WiredTigerPreplog.0000000002
-   PaymentApi/mongod.lock
-	  PaymentApi/sizeStorer.wt
-	 PaymentApi/storage.bson
+PaymentApi/WiredTiger
+PaymentApi/WiredTiger.lock
+PaymentApi/WiredTiger.turtle
+PaymentApi/WiredTiger.wt
+PaymentApi/WiredTigerHS.wt
+PaymentApi/_mdb_catalog.wt
+PaymentApi/collection-0-1765933690296327598.wt
+PaymentApi/collection-2-1765933690296327598.wt
+PaymentApi/collection-4-1765933690296327598.wt
+PaymentApi/diagnostic.data/metrics.2023-07-11T12-08-20Z-00000
+PaymentApi/index-1-1765933690296327598.wt
+PaymentApi/index-3-1765933690296327598.wt
+PaymentApi/index-5-1765933690296327598.wt
+PaymentApi/index-6-1765933690296327598.wt
+PaymentApi/journal
+PaymentApi/mongod.lock
+PaymentApi/sizeStorer.wt
+PaymentApi/storage.bson
+
+
+

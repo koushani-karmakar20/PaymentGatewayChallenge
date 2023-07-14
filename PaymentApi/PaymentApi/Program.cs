@@ -7,7 +7,7 @@ using PaymentApi.Services;
 
 // Add services to the container.
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddCors();
 // Add services to the container.
 builder.Services.Configure<PaymentGatewayStoreDatabaseSettings>(
     builder.Configuration.GetSection("PaymentGatewayStoreDatabase"));
@@ -19,7 +19,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
+app.UseCors(builder => builder
+     .AllowAnyOrigin()
+     .AllowAnyMethod()
+     .AllowAnyHeader());   
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

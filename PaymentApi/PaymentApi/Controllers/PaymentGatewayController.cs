@@ -2,6 +2,7 @@ using PaymentApi.Models;
 using PaymentApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using PaymentApi.Exceptions;
+using AwesomeApi.Filters;
 
 namespace PaymentApi.Controllers;
 
@@ -33,7 +34,21 @@ public class PaymentGatewayController : ControllerBase
             return NotFound();
         }
 
-        return NoContent();
+        return payment;
+    }
+
+    [HttpGet("GetPaymentsWithMerchantId")]
+    public async Task<ActionResult<List<Payment>>> GetPaymentsWithMerchantId(string id)
+    {
+        
+        var payment = await _paymentGatewayService.GetPaymentsWithMerchantId(id);
+
+        if (payment is null)
+        {
+            return NotFound();
+        }
+
+        return payment;
     }
 
 
@@ -133,7 +148,8 @@ public class PaymentGatewayController : ControllerBase
         return NoContent();
     }
 
-     [HttpPost("SendPaymentRequestToBank")]
+    [ApiKey]
+    [HttpPost("SendPaymentRequestToBank")]
     public async Task<ActionResult<PaymentResponse>> SendPaymentRequestToBank(PaymentPayload paymentPayload)
     {
         PaymentResponse paymentResponse;
@@ -157,6 +173,7 @@ public class PaymentGatewayController : ControllerBase
          return paymentResponse;
     }
 
+    [ApiKey]
     [HttpPost("RetrievePayment")]
     public async Task<ActionResult<RetrieveResponse>> RetrievePastPayment(RetrievePayload retrievePayload)
     {

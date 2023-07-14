@@ -17,6 +17,24 @@ public class BankController : ControllerBase
     public BankController(BankService bankService) =>
         _bankService = bankService;
 
+    [HttpGet("GetCustomer")]
+    public async Task<ActionResult<Customer>> GetCustomer(string id ) {
+        var customer = await _bankService.GetAsync(id);
+
+        if (customer is null)
+        {
+            return NotFound();
+        }
+
+        return customer;
+    }
+
+    [HttpPost("CreateCustomer")]
+    public async Task<IActionResult> CreateCustomer(Customer customer ) {
+        await _bankService.CreateAsync(customer);
+
+        return CreatedAtAction(nameof(GetCustomer), new { id = customer.Id }, customer);
+    }
    
 
     [HttpPost("PerformTransaction")]

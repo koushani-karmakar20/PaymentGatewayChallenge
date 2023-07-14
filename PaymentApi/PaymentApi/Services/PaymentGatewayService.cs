@@ -1,5 +1,5 @@
 using PaymentApi.Models;
-//using BookStoreApi.Models;
+
 using PaymentApi.Exceptions;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -9,8 +9,7 @@ using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Net;
 using System.Text;
-//using Newtonsoft.Json.Linq;
-// using System.Text.Json.JsonSerializer;
+
 
 namespace PaymentApi.Services;
 
@@ -21,6 +20,8 @@ public class PaymentGatewayService
 
     // private const string URL = "https://jsonplaceholder.typicode.com/todos";
     // private string urlParameters = "?api_key=123";
+
+    public PaymentGatewayService(){}
 
     public PaymentGatewayService(
         IOptions<PaymentGatewayStoreDatabaseSettings> paymentGatewayStoreDatabaseSettings)
@@ -53,7 +54,10 @@ public class PaymentGatewayService
     public async Task<Payment?> GetAsyncPaymentWithId(string id) =>
         await _paymentsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-     public async Task<Merchant?> GetAsyncMerchantWithId(string id) =>
+    public async Task<List<Payment>?> GetPaymentsWithMerchantId(string id) =>
+        await _paymentsCollection.Find(x => x.Merchant_id == id).ToListAsync();
+
+     virtual public async Task<Merchant> GetAsyncMerchantWithId(string id) =>
         await _merchantsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
     
@@ -81,10 +85,10 @@ public class PaymentGatewayService
 
     
     public async Task <PaymentResponse?> SendPaymentRequest(PaymentPayload paymentPayload) {
-
         //check if the merchant id exists in the payment payload , or if the merchant is active or not 
 
-        Merchant merchant=await GetAsyncMerchantWithId(paymentPayload.Merchant_id);
+        Merchant merchant = await GetAsyncMerchantWithId(paymentPayload.Merchant_id);
+
         if(merchant is null)
         {
             throw new MerchantNotFoundException($"Merchant : {paymentPayload.Merchant_id} not found");
@@ -93,7 +97,6 @@ public class PaymentGatewayService
         {
             throw new MerchantInactiveException($"Merchant : {paymentPayload.Merchant_id} is no longer active");
         }
-
         //api authentication to be done here 
         //if authenticated , currency conversion from payload currency to euro to be done
         var client2=new HttpClient();
@@ -102,13 +105,12 @@ public class PaymentGatewayService
         JsonElement root = doc.RootElement;  
         double conversion = root.GetProperty("conversion_rate").GetDouble(); 
         double converted_amount=paymentPayload.Amount * conversion;
-        Console.WriteLine(converted_amount);
+        //Console.WriteLine(converted_amount);
 
-        HttpClient client = new HttpClient();
-
-
-
-        client.BaseAddress = new Uri("http://localhost:5121/Bank/");
+        HttpClient client = new HttpClient
+        {
+            BaseAddress = new Uri("http://localhost:5121/Bank/")
+        };
 
         // Add an Accept header for JSON format.
         client.DefaultRequestHeaders.Accept.Add(
@@ -131,12 +133,12 @@ public class PaymentGatewayService
         var content = new StringContent(payload, Encoding.UTF8, "application/json");
 
         // // List data response.
-        HttpResponseMessage response= client.PostAsync("PerformTransaction", content).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+        HttpResponseMessage response = client.PostAsync("PerformTransaction", content).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
         //once the payment is successfully completed , create a record of the payment in payments database
         //rn considering only successful payment
 
         //string responseBody = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(response);
+        //Console.WriteLine(response);
 
         string description="";
         bool status;
@@ -148,7 +150,8 @@ public class PaymentGatewayService
             status=false;
             description="Payment unsuccessful: "+response.ReasonPhrase;
         }
-
+        Console.WriteLine(description);
+        Console.WriteLine(status);
         
         Payment payment=new Payment{
             Status=status,
@@ -167,45 +170,11 @@ public class PaymentGatewayService
         PaymentResponse paymentResponse=new PaymentResponse{
             Id=payment.Id,
             Status=payment.Status,
-            Timestamp=payment.Timestamp,
+            //Timestamp=payment.Timestamp,
             Description=payment.Description
         };
         return paymentResponse;
-        //Console.WriteLine(response);
-        // if (response.IsSuccessStatusCode)
-        // {
-        //     // Parse the response body.
-        //     var dataObjects = await response.Content.ReadAsStringAsync(); //right!
-            
-        //     Console.WriteLine(JsonConvert.DeserializeObject<object>(dataObjects));
-        //     // foreach (var d in dataObjects)
-        //     // {
-        //     //     Console.WriteLine(d);
-        //     // }
-        //     //  Console.WriteLine("{0}");
-        // }
-        // else
-        // {
-        //     Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-        // }
-        //await _paymentsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
-
-
-        //  HttpClient client2 = new HttpClient();
-
-
-
-        // client2.BaseAddress = new Uri("https://v6.exchangerate-api.com/v6/769f358153c8481724c568b6/pair/EUR/GBP");
-
-        // // Add an Accept header for JSON format.
-        // client2.DefaultRequestHeaders.Accept.Add(
-        // new MediaTypeWithQualityHeaderValue("application/json"));
-
-        
-        // // List data response.
-        
-       //Task< HttpResponseMessage> response2= client2.GetAsync("https://v6.exchangerate-api.com/v6/769f358153c8481724c568b6/pair/EUR/GBP");
-       //Console.WriteLine(result);
+       
 
         
     }

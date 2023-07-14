@@ -35,7 +35,7 @@ export default function BasicGrid() {
     }
 
     function fetchMerchant() {
-        axios.get('http://localhost:5281/api/PaymentGateway/GetPaymentsWithMerchantId?id='+merchantId)
+        axios.get('https://paymentgateway-koushani.azurewebsites.net/api/PaymentGateway/GetPaymentsWithMerchantId?id='+merchantId)
   .then(function (response) {
     // handle success
     console.log(response);
@@ -86,7 +86,7 @@ export default function BasicGrid() {
                 {/* </Typography> */}
             </Item>
         </Grid>}
-        {!payments && <Grid xs={4} style={{marginLeft: "40%"}}>"No Payment found!"</Grid>}
+        {!payments && <Grid xs={4} style={{marginLeft: "40%"}}>No Payment found!</Grid>}
 
       </Grid>
     </Box>

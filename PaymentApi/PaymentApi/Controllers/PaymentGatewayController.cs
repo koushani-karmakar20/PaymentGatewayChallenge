@@ -164,20 +164,17 @@ public class PaymentGatewayController : ControllerBase
         {
             return BadRequest(ex.Message);
         }
+        
+        if(paymentResponse.Status==false)
+        return BadRequest("payment unsuccessful");
 
-        // if (payment is null)
-        // {
-        //     return NotFound();
-        // }
-
-         return paymentResponse;
+        return paymentResponse;
     }
 
     [ApiKey]
     [HttpPost("RetrievePayment")]
     public async Task<ActionResult<RetrieveResponse>> RetrievePastPayment(RetrievePayload retrievePayload)
     {
-        
         var response = await _paymentGatewayService.RetrievePayment(retrievePayload);
 
         if (response is null)

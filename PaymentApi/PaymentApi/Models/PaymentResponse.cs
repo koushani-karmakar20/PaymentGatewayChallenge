@@ -9,13 +9,7 @@ public class PaymentResponse
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }
 
-    //[BsonElement("Name")]
-   // public string Payment_id { get; set; } = null!;
-
     public bool Status { get; set; }
-
-    //public DateTime Timestamp { get; set; } 
-
 
     public string Description { get; set; } = null!;
 

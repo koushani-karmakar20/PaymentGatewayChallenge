@@ -5,7 +5,7 @@ namespace PaymentApi.Models;
 
 public class PaymentPayload
 {
-    [BsonId]
+    // [BsonId]
     //y[BsonRepresentation(BsonType.ObjectId)]
     //public string? Id { get; set; }
 

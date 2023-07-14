@@ -18,11 +18,7 @@ namespace AwesomeApi.Filters;
 public class ApiKeyAttribute : Attribute, IAuthorizationFilter
 {
     private const string API_KEY_HEADER_NAME = "X-API-Key";
-    // private readonly PaymentGatewayService _name;
 
-    // public ApiKeyAttribute(PaymentGatewayService name) {
-    //     _name = name;
-    // }
     public async void OnAuthorization(AuthorizationFilterContext context)
     {
         var submittedApiKey = GetSubmittedApiKey(context.HttpContext);

@@ -35,7 +35,7 @@ export default function BasicGrid() {
     }
 
     function fetchMerchant() {
-        axios.get('http://localhost:5281/api/PaymentGateway/GetMerchantWithId?id='+merchantId)
+        axios.get('https://paymentgateway-koushani.azurewebsites.net/api/PaymentGateway/GetMerchantWithId?id='+merchantId)
   .then(function (response) {
     // handle success
     console.log(response);

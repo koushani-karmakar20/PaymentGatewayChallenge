@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Transactions;
 using MongoDB.Driver;
 using BankStoreApi.Exceptions;
-// using System.Net.Http;
 
 namespace BankStoreApi.Controllers;
 
@@ -53,9 +52,6 @@ public class BankController : ControllerBase
         return Problem(err.Message);
     }
     
-     return NoContent();
-
-
-
+    return NoContent();
     }
 }

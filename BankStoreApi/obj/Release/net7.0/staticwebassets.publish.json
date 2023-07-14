@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "pCgFRDpJMU1f/eezFlIa0Vvc3aVYwR8VCDInL1YxS2o=",
+  "Source": "BankStoreApi",
+  "BasePath": "_content/BankStoreApi",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

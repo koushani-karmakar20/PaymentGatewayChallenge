@@ -9,7 +9,7 @@ namespace BankStoreApi.Services;
 public class BankService
 {
     private  IMongoCollection<Customer> _customersCollection;
-     private IMongoClient mongoClient;
+    private IMongoClient mongoClient;
     private readonly IOptions<BankStoreDatabaseSettings> bankStoreDatabaseSetting;
     public BankService(
         IOptions<BankStoreDatabaseSettings> bankStoreDatabaseSettings)
@@ -40,7 +40,7 @@ public class BankService
     public async Task RemoveAsync(string id) =>
         await _customersCollection.DeleteOneAsync(x => x.Id == id);
 
-    public async Task Transaction(Payload payload )
+    public async Task Transaction(Payload payload)
     {
 
         Customer customer = await GetAsync(payload.Customer_card_number);
@@ -56,8 +56,6 @@ public class BankService
         Customer merchant=await GetAsync(payload.Merchant_card_number);
         if(merchant is null)
             throw new CustomerNotFoundException($"{payload.Merchant_card_number} not found");
-        
-       
 
         using(var session = await mongoClient.StartSessionAsync())
         {
@@ -70,14 +68,13 @@ public class BankService
                 UpdateAsync(merchant.Card_number,merchant);
 
                 await session.CommitTransactionAsync();
-        
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("error in transaction :"+e.Message);
+                await session.AbortTransactionAsync();
+                throw new Exception("Transcation rolled back!");
+            }
         }
-        catch(Exception e)
-        {
-            Console.WriteLine("error in transaction :"+e.Message);
-            await session.AbortTransactionAsync();
-            throw new Exception("Transcation rolled back!");
-        }
-    }
     }
 }
